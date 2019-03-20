@@ -38,6 +38,7 @@ extension RecipesTableViewController: ViewControllerSetupProtocol {
 		self.tableViewDataSource = RecipesTableViewDataSource(adapter: adapter)
 		self.tableView.dataSource = self.tableViewDataSource
 		self.tableView.delegate = self.tableViewDataSource
+		self.tableView.prefetchDataSource = self.tableViewDataSource
 	}
 	
 	func setupLocalization() {
