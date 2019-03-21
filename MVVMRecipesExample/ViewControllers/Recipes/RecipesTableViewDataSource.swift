@@ -26,7 +26,7 @@ class RecipesTableViewDataSource: NSObject, UITableViewDataSource {
 	
 	// MARK: - UITableViewDataSource
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return self.observableData.count + 1
+		return self.observableData.count + 50
 	}
 
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

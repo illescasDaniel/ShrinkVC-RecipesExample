@@ -25,23 +25,35 @@ final public class TableViewAdapter<Component: UITableView, ElementType>: Compon
 		self.component = component
 		self.observableElements = ObservableArray<ElementType>(elements, observers: [
 			.append { (newElements, firstIndex) in
-				self.component?.reloadData()
+				DispatchQueue.main.async {
+					self.component?.reloadData()
+				}
 			},
 			.remove { (removedElement, index) in
-				self.component?.deleteRows(at: [IndexPath(row: index, section: section)], with: .automatic)
+				DispatchQueue.main.async {
+					self.component?.deleteRows(at: [IndexPath(row: index, section: section)], with: .automatic)
+				}
 			},
 			.removeAll { (firstElement, lastElement, indices) in
-				self.component?.reloadSections(IndexSet(integer: section), with: .automatic)
+				DispatchQueue.main.async {
+					self.component?.reloadSections(IndexSet(integer: section), with: .automatic)
+				}
 			},
 			.insert { (insertedElements, indices) in
-				let indexPaths = indices.map { IndexPath(row: $0, section: section) }
-				self.component?.insertRows(at: indexPaths, with: .automatic)
+				DispatchQueue.main.async {
+					let indexPaths = indices.map { IndexPath(row: $0, section: section) }
+					self.component?.insertRows(at: indexPaths, with: .automatic)
+				}
 			},
 			.move { (source, destinationIndex) in
-				self.component?.moveRow(at: IndexPath(row: source.index, section: section), to: IndexPath(row: destinationIndex, section: section))
+				DispatchQueue.main.async {
+					self.component?.moveRow(at: IndexPath(row: source.index, section: section), to: IndexPath(row: destinationIndex, section: section))
+				}
 			},
 			.update { (updatedElement, index) in
-				self.component?.reloadRows(at: [IndexPath(row: index, section: section)], with: .automatic)
+				DispatchQueue.main.async {
+					self.component?.reloadRows(at: [IndexPath(row: index, section: section)], with: .automatic)
+				}
 			}
 		])
 	}
