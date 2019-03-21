@@ -8,14 +8,17 @@
 
 import Foundation
 
-public enum ObserverAction {
-	case append
-	case remove
-	case removeAll
-	case insert
-	case move
-	case update
+public typealias Callback<T> = (T) -> Void
+
+public enum ObserverAction<Element, Index: Comparable> {
+	case append(Callback<(newElements: [Element], firstIndex: Index)>)
+	case remove(Callback<(removedElement: Element, elementIndex: Index)>)
+	case removeAll(Callback<(firstElement: Element, lastElement: Element, indices: Range<Index>)>)
+	case insert(Callback<(insertedElements: [Element], indices: Range<Index>)>)
+	case move(Callback<(source: (element: Element, index: Index), destinationIndex: Index)>)
+	case update(Callback<(updatedElement: Element, index: Index)>)
 }
+
 public protocol ObservableCollection {
 	
 	associatedtype CollectionType: Collection
@@ -23,9 +26,9 @@ public protocol ObservableCollection {
 	typealias ObserverHandler = (_ element: CollectionType.Element, _ indices: [CollectionType.Index]) -> Void
 	
 	var rawElements: CollectionType { get }
-	var observers: [ObserverAction: ObserverHandler] { get }
+	var observers: [ObserverAction<CollectionType.Element, CollectionType.Index>] { get }
 	
-	init(_ elements: CollectionType, observers: [ObserverAction: ObserverHandler] )
+	init(_ elements: CollectionType, observers: [ObserverAction<CollectionType.Element, CollectionType.Index>])
 	
 	func append(_ elements: CollectionType.Element...) -> Bool
 	func remove(at index: CollectionType.Index) -> Bool

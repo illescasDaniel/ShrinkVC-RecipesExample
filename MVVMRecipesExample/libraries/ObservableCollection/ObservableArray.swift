@@ -12,15 +12,20 @@ final public class ObservableArray<T>: ObservableCollection, CustomStringConvert
 	
 	public typealias CollectionType = [T]
 	
-	public let observers: [ObserverAction: ObserverHandler]
+	public let observers: [ObserverAction<T, Int>]
 	private var elements: CollectionType = []
 	public var rawElements: CollectionType {
 		return self.elements
 	}
 	
-	public init(_ elements: CollectionType = [], observers: [ObserverAction: ObserverHandler] = [:]) {
+	public init(_ elements: CollectionType = [], observers: [ObserverAction<T, Int>] = []) {
 		self.elements = elements
 		self.observers = observers
+	}
+	
+	public func addStubElements(count: Int, from element: CollectionType.Element) {
+		let elements = [CollectionType.Element](repeating: element, count: count)
+		self.elements.append(contentsOf: elements)
 	}
 	
 	@discardableResult
@@ -33,7 +38,12 @@ final public class ObservableArray<T>: ObservableCollection, CustomStringConvert
 		if elements.isEmpty { return false }
 		self.elements.append(contentsOf: elements)
 		DispatchQueue.main.async {
-			self.observers[.append]?(elements[0], [self.elements.count - 1])
+			for observer in self.observers {
+				if case .append(let handler) = observer {
+					handler((newElements: elements, firstIndex: self.elements.count - 1))
+					break
+				}
+			}
 		}
 		return true
 	}
@@ -43,7 +53,12 @@ final public class ObservableArray<T>: ObservableCollection, CustomStringConvert
 		guard self.elements.indices.contains(index) else { return false }
 		let removedElement = self.elements.remove(at: index)
 		DispatchQueue.main.async {
-			self.observers[.remove]?(removedElement, [index])
+			for observer in self.observers {
+				if case .remove(let handler) = observer {
+					handler((removedElement: removedElement, elementIndex: index))
+					break
+				}
+			}
 		}
 		return true
 	}
@@ -51,11 +66,17 @@ final public class ObservableArray<T>: ObservableCollection, CustomStringConvert
 	@discardableResult
 	public func removeAll(keepingCapacity: Bool = false) -> Bool {
 		if self.elements.isEmpty { return false }
+		let firstRemovedElement = self.elements.first ?? self.elements[0]
 		let lastRemovedElement = self.elements.last ?? self.elements[0]
-		let lastElementIndex = self.elements.count - 1
+		let removedIndices = self.elements.indices
 		self.elements.removeAll(keepingCapacity: keepingCapacity)
 		DispatchQueue.main.async {
-			self.observers[.removeAll]?(lastRemovedElement, [lastElementIndex])
+			for observer in self.observers {
+				if case .removeAll(let handler) = observer {
+					handler((firstElement: firstRemovedElement, lastElement: lastRemovedElement, indices: removedIndices))
+					break
+				}
+			}
 		}
 		return true
 	}
@@ -70,8 +91,14 @@ final public class ObservableArray<T>: ObservableCollection, CustomStringConvert
 		guard !elements.isEmpty
 			&& (self.elements.indices.lowerBound...self.elements.indices.upperBound).contains(index) else { return false }
 		self.elements.insert(contentsOf: elements, at: index)
+		let indicesRange = index..<(index+elements.count)
 		DispatchQueue.main.async {
-			self.observers[.insert]?(elements[0], Array(index..<(index+elements.count)))
+			for observer in self.observers {
+				if case .insert(let handler) = observer {
+					handler((insertedElements: elements, indices: indicesRange))
+					break
+				}
+			}
 		}
 		return true
 	}
@@ -81,7 +108,12 @@ final public class ObservableArray<T>: ObservableCollection, CustomStringConvert
 		guard let element = self[safe: index] else { return false }
 		self.elements[index] = foundElementHandler(element)
 		DispatchQueue.main.async {
-			self.observers[.update]?(element, [index])
+			for observer in self.observers {
+				if case .update(let handler) = observer {
+					handler((updatedElement: element, index: index))
+					break
+				}
+			}
 		}
 		return true
 	}
@@ -92,7 +124,12 @@ final public class ObservableArray<T>: ObservableCollection, CustomStringConvert
 		self.elements.remove(at: sourceIndex)
 		self.elements.insert(elementToMove, at: destinationIndex)
 		DispatchQueue.main.async {
-			self.observers[.move]?(elementToMove, [sourceIndex, destinationIndex])
+			for observer in self.observers {
+				if case .move(let handler) = observer {
+					handler((source: (element: elementToMove, index: sourceIndex), destinationIndex: destinationIndex))
+					break
+				}
+			}
 		}
 		return true
 	}

@@ -25,7 +25,6 @@ class RecipesTableViewDataSource: NSObject, UITableViewDataSource {
 	}
 	
 	// MARK: - UITableViewDataSource
-	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return self.observableData.count + 1
 	}
@@ -69,7 +68,8 @@ extension RecipesTableViewDataSource {
 	func fetchRecipes() {
 		Recipe.Service.recipesFrom(ingredients: self.fetchOptions.ingredients,
 								   searchQuery: self.fetchOptions.searchQuery,
-								   page: self.fetchOptions.page).then { recipes in
+								   page: self.fetchOptions.page).then
+			{ recipes in
 			self.observableData.append(recipes)
 		}
 	}
