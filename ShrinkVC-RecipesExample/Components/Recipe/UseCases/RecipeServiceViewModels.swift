@@ -8,11 +8,18 @@
 
 import UIKit
 
-extension Recipe.Service {
+extension Recipe.UseCase {
 	enum ViewModels {
 		
 		struct RecipeViewModel: ViewModel {
+			
 			var model: Recipe.Service.Models.RecipeModel
+			var emptyState = true
+			
+			init(model: Recipe.Service.Models.RecipeModel) {
+				self.model = model
+			}
+			
 			var titleText: String {
 				return self.model.title.trimmingCharacters(in: .whitespacesAndNewlines)
 			}

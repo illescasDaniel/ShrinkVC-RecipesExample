@@ -10,7 +10,7 @@ import UIKit
 
 class RecipesTableViewController: UITableViewController {
 	
-	typealias RecipeVM = Recipe.Service.ViewModels.RecipeViewModel
+	typealias RecipeVM = Recipe.UseCase.ViewModels.RecipeViewModel
 
 	private var tableViewDataSource: RecipesTableViewDataSource!
 	private var elements: ObservableArray<RecipeVM> {
@@ -23,7 +23,7 @@ class RecipesTableViewController: UITableViewController {
 		self.setupLocalization()
 		
 		self.tableViewDataSource.fetchOptions.ingredients = "garlic"
-		self.tableViewDataSource.fetchRecipes()
+		self.tableViewDataSource.fetchRecipes(page: 0)
 	}
 }
 
@@ -35,7 +35,7 @@ extension RecipesTableViewController: ViewControllerSetupProtocol {
 	
 	func setupController() {
 		let adapter = TableViewAdapter(component: self.tableView, initialElements: [RecipeVM]())
-		self.tableViewDataSource = RecipesTableViewDataSource(adapter: adapter)
+		self.tableViewDataSource = RecipesTableViewDataSource(adapter: adapter, useCases: (Recipe.UseCase.self, Recipe.UseCase.self))
 		self.tableView.dataSource = self.tableViewDataSource
 		self.tableView.delegate = self.tableViewDataSource
 		self.tableView.prefetchDataSource = self.tableViewDataSource

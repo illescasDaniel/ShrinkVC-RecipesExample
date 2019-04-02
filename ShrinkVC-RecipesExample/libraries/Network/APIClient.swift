@@ -18,7 +18,7 @@ public protocol APIClient {
 }
 
 public extension APIClient {
-	public static func request<RequestType: Decodable>(_ config: APIConfigType) -> Future<RequestType> {
+	static func request<RequestType: Decodable>(_ config: APIConfigType) -> Future<RequestType> {
 		return Future { fulfill, reject in
 			
 			var urlRequest_: URLRequest?

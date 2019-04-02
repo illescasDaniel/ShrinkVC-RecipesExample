@@ -40,19 +40,19 @@ public protocol ObservableCollection {
 
 // Some convenient methods
 public extension ObservableCollection {
-	public var count: Int {
+	var count: Int {
 		return self.rawElements.count
 	}
-	public var isEmpty: Bool {
+	var isEmpty: Bool {
 		return self.rawElements.isEmpty
 	}
-	public subscript(safe index: CollectionType.Index) -> CollectionType.Element? {
+	subscript(safe index: CollectionType.Index) -> CollectionType.Element? {
 		return self.rawElements.indices.contains(index) ? self.rawElements[index] : nil
 	}
 }
 
 public extension ObservableCollection where CollectionType: CustomStringConvertible {
-	public var description: String {
+	var description: String {
 		return self.rawElements.description
 	}
 }

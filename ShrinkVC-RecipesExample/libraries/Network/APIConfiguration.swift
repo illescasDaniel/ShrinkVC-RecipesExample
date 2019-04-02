@@ -10,21 +10,29 @@ import Foundation
 
 enum APIConfigurationError: Error {
 	case invalidBody
+	case invalidURLComponents
 }
 
 public protocol APIConfiguration: URLRequestConvertible {
 	var baseURL: URLConvertible { get }
 	var path: String { get }
+	var queryItems: [URLQueryItem] { get }
 	var method: HTTPMethod { get }
 	var parameters: Parameters? { get }
 }
 
 public extension APIConfiguration {
-	public func asURLRequest() throws -> URLRequest {
+	func asURLRequest() throws -> URLRequest {
 		
-		let url = try self.baseURL.asURL()
+		let baseURL = try self.baseURL.asURL()
 		
-		var urlRequest = URLRequest(url: url.appendingPathComponent(self.path))
+		let baseURLWithPath = baseURL.appendingPathComponent(self.path)
+		var urlComponents = URLComponents(url: baseURLWithPath, resolvingAgainstBaseURL: true)
+		urlComponents?.queryItems = self.queryItems
+		
+		guard let fullURL = urlComponents?.url?.absoluteURL else { throw APIConfigurationError.invalidURLComponents }
+		
+		var urlRequest = URLRequest(url: fullURL)
 		urlRequest.timeoutInterval = 20
 		urlRequest.httpMethod = self.method.rawValue.uppercased()
 		urlRequest.setValue(ContentType.json.rawValue,

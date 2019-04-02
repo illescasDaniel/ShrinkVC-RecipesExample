@@ -1,4 +1,4 @@
-MVVMRecipesExample
+ShrinkVC-RecipesExample
 ---
 
 Example of a table view controller with separate data source, using adapters, observers and viewmodels.

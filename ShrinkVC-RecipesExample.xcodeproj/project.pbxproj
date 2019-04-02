@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		650A703222528B2000349130 /* MockableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650A703122528B2000349130 /* MockableModel.swift */; };
+		650A703422528D2100349130 /* UseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650A703322528D2100349130 /* UseCase.swift */; };
+		650A703822529A9C00349130 /* RecipeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650A703722529A9C00349130 /* RecipeUseCase.swift */; };
 		65D36B962241B20600CDBFD6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D36B952241B20600CDBFD6 /* AppDelegate.swift */; };
 		65D36B982241B20600CDBFD6 /* RecipesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D36B972241B20600CDBFD6 /* RecipesTableViewController.swift */; };
 		65D36B9B2241B20600CDBFD6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65D36B992241B20600CDBFD6 /* Main.storyboard */; };
@@ -37,7 +40,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		65D36B922241B20600CDBFD6 /* MVVMRecipesExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MVVMRecipesExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		650A703122528B2000349130 /* MockableModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockableModel.swift; sourceTree = "<group>"; };
+		650A703322528D2100349130 /* UseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCase.swift; sourceTree = "<group>"; };
+		650A703722529A9C00349130 /* RecipeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeUseCase.swift; sourceTree = "<group>"; };
+		65D36B922241B20600CDBFD6 /* ShrinkVC-RecipesExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ShrinkVC-RecipesExample.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		65D36B952241B20600CDBFD6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		65D36B972241B20600CDBFD6 /* RecipesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesTableViewController.swift; sourceTree = "<group>"; };
 		65D36B9A2241B20600CDBFD6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -79,10 +85,54 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		650A702F225289B100349130 /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+				650A703322528D2100349130 /* UseCase.swift */,
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
+		650A7030225289B600349130 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				65D36BC42241B6C900CDBFD6 /* ViewModel.swift */,
+				65D36BC22241B6C900CDBFD6 /* MappableModel.swift */,
+				650A703122528B2000349130 /* MockableModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		650A703522529A7900349130 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				65D36BD42241B95800CDBFD6 /* ServiceAndModels */,
+				65D36BCE2241B95800CDBFD6 /* apiClient */,
+				65D36BD12241B95800CDBFD6 /* config */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		650A703622529A8700349130 /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+				65D36BD52241B95800CDBFD6 /* RecipeServiceViewModels.swift */,
+				650A703722529A9C00349130 /* RecipeUseCase.swift */,
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
+		650A703922529AD400349130 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		65D36B892241B20600CDBFD6 = {
 			isa = PBXGroup;
 			children = (
-				65D36B942241B20600CDBFD6 /* MVVMRecipesExample */,
+				65D36B942241B20600CDBFD6 /* ShrinkVC-RecipesExample */,
 				65D36B932241B20600CDBFD6 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -90,12 +140,12 @@
 		65D36B932241B20600CDBFD6 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				65D36B922241B20600CDBFD6 /* MVVMRecipesExample.app */,
+				65D36B922241B20600CDBFD6 /* ShrinkVC-RecipesExample.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		65D36B942241B20600CDBFD6 /* MVVMRecipesExample */ = {
+		65D36B942241B20600CDBFD6 /* ShrinkVC-RecipesExample */ = {
 			isa = PBXGroup;
 			children = (
 				65D36BAD2241B2FB00CDBFD6 /* libraries */,
@@ -107,7 +157,7 @@
 				65D36B9E2241B20900CDBFD6 /* LaunchScreen.storyboard */,
 				65D36BA12241B20900CDBFD6 /* Info.plist */,
 			);
-			path = MVVMRecipesExample;
+			path = "ShrinkVC-RecipesExample";
 			sourceTree = "<group>";
 		};
 		65D36BA72241B21300CDBFD6 /* ViewControllers */ = {
@@ -131,6 +181,8 @@
 		65D36BAD2241B2FB00CDBFD6 /* libraries */ = {
 			isa = PBXGroup;
 			children = (
+				650A7030225289B600349130 /* Model */,
+				650A702F225289B100349130 /* UseCases */,
 				65D36BBC2241B3F200CDBFD6 /* Network */,
 				65D36BB32241B37F00CDBFD6 /* ComponentAdapter */,
 				65D36BAE2241B30100CDBFD6 /* ObservableCollection */,
@@ -164,9 +216,7 @@
 				65D36BBF2241B6C900CDBFD6 /* APIClient.swift */,
 				65D36BC02241B6C900CDBFD6 /* APIConfiguration.swift */,
 				65D36BC12241B6C900CDBFD6 /* APIService.swift */,
-				65D36BC22241B6C900CDBFD6 /* MappableModel.swift */,
 				65D36BC32241B6C900CDBFD6 /* Network+Extension.swift */,
-				65D36BC42241B6C900CDBFD6 /* ViewModel.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -182,9 +232,9 @@
 		65D36BBE2241B44200CDBFD6 /* Recipe */ = {
 			isa = PBXGroup;
 			children = (
-				65D36BCE2241B95800CDBFD6 /* apiClient */,
-				65D36BD12241B95800CDBFD6 /* config */,
-				65D36BD42241B95800CDBFD6 /* ServiceAndModels */,
+				650A703922529AD400349130 /* View */,
+				650A703622529A8700349130 /* UseCases */,
+				650A703522529A7900349130 /* Service */,
 				65D36BCD2241B95800CDBFD6 /* Recipe.swift */,
 			);
 			path = Recipe;
@@ -193,8 +243,8 @@
 		65D36BCE2241B95800CDBFD6 /* apiClient */ = {
 			isa = PBXGroup;
 			children = (
-				65D36BCF2241B95800CDBFD6 /* RecipeAPIClientModels.swift */,
 				65D36BD02241B95800CDBFD6 /* RecipeAPIClient.swift */,
+				65D36BCF2241B95800CDBFD6 /* RecipeAPIClientModels.swift */,
 			);
 			path = apiClient;
 			sourceTree = "<group>";
@@ -211,9 +261,8 @@
 		65D36BD42241B95800CDBFD6 /* ServiceAndModels */ = {
 			isa = PBXGroup;
 			children = (
-				65D36BD72241B95800CDBFD6 /* RecipeServiceModels.swift */,
-				65D36BD52241B95800CDBFD6 /* RecipeServiceViewModels.swift */,
 				65D36BD62241B95800CDBFD6 /* RecipeService.swift */,
+				65D36BD72241B95800CDBFD6 /* RecipeServiceModels.swift */,
 			);
 			path = ServiceAndModels;
 			sourceTree = "<group>";
@@ -221,9 +270,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		65D36B912241B20600CDBFD6 /* MVVMRecipesExample */ = {
+		65D36B912241B20600CDBFD6 /* ShrinkVC-RecipesExample */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 65D36BA42241B20900CDBFD6 /* Build configuration list for PBXNativeTarget "MVVMRecipesExample" */;
+			buildConfigurationList = 65D36BA42241B20900CDBFD6 /* Build configuration list for PBXNativeTarget "ShrinkVC-RecipesExample" */;
 			buildPhases = (
 				65D36B8E2241B20600CDBFD6 /* Sources */,
 				65D36B8F2241B20600CDBFD6 /* Frameworks */,
@@ -233,9 +282,9 @@
 			);
 			dependencies = (
 			);
-			name = MVVMRecipesExample;
+			name = "ShrinkVC-RecipesExample";
 			productName = MVVMExample;
-			productReference = 65D36B922241B20600CDBFD6 /* MVVMRecipesExample.app */;
+			productReference = 65D36B922241B20600CDBFD6 /* ShrinkVC-RecipesExample.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -250,10 +299,11 @@
 				TargetAttributes = {
 					65D36B912241B20600CDBFD6 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1020;
 					};
 				};
 			};
-			buildConfigurationList = 65D36B8D2241B20600CDBFD6 /* Build configuration list for PBXProject "MVVMRecipesExample" */;
+			buildConfigurationList = 65D36B8D2241B20600CDBFD6 /* Build configuration list for PBXProject "ShrinkVC-RecipesExample" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -266,7 +316,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				65D36B912241B20600CDBFD6 /* MVVMRecipesExample */,
+				65D36B912241B20600CDBFD6 /* ShrinkVC-RecipesExample */,
 			);
 		};
 /* End PBXProject section */
@@ -300,6 +350,8 @@
 				65D36BDD2241B95800CDBFD6 /* RecipeServiceViewModels.swift in Sources */,
 				65D36BDB2241B95800CDBFD6 /* RecipeConstants.swift in Sources */,
 				65D36BE12241C41900CDBFD6 /* ViewControllerSetupProtocol.swift in Sources */,
+				650A703422528D2100349130 /* UseCase.swift in Sources */,
+				650A703822529A9C00349130 /* RecipeUseCase.swift in Sources */,
 				65D36BC82241B6C900CDBFD6 /* MappableModel.swift in Sources */,
 				65D36BCC2241B6E200CDBFD6 /* Future.swift in Sources */,
 				65D36BB22241B32300CDBFD6 /* ObservableArray.swift in Sources */,
@@ -307,6 +359,7 @@
 				65D36BAA2241B23600CDBFD6 /* RecipesTableViewAdapter.swift in Sources */,
 				65D36BCA2241B6C900CDBFD6 /* ViewModel.swift in Sources */,
 				65D36BC72241B6C900CDBFD6 /* APIService.swift in Sources */,
+				650A703222528B2000349130 /* MockableModel.swift in Sources */,
 				65D36B982241B20600CDBFD6 /* RecipesTableViewController.swift in Sources */,
 				65D36BB72241B3A300CDBFD6 /* TableViewAdapter.swift in Sources */,
 				65D36BB02241B30C00CDBFD6 /* ObservableCollection.swift in Sources */,
@@ -460,14 +513,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = PRK6268SLD;
-				INFOPLIST_FILE = "$(SRCROOT)/MVVMRecipesExample/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/ShrinkVC-RecipesExample/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "es.illescas-daniel.MVVMExample";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -478,14 +531,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = PRK6268SLD;
-				INFOPLIST_FILE = "$(SRCROOT)/MVVMRecipesExample/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/ShrinkVC-RecipesExample/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "es.illescas-daniel.MVVMExample";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -493,7 +546,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		65D36B8D2241B20600CDBFD6 /* Build configuration list for PBXProject "MVVMRecipesExample" */ = {
+		65D36B8D2241B20600CDBFD6 /* Build configuration list for PBXProject "ShrinkVC-RecipesExample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				65D36BA22241B20900CDBFD6 /* Debug */,
@@ -502,7 +555,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		65D36BA42241B20900CDBFD6 /* Build configuration list for PBXNativeTarget "MVVMRecipesExample" */ = {
+		65D36BA42241B20900CDBFD6 /* Build configuration list for PBXNativeTarget "ShrinkVC-RecipesExample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				65D36BA52241B20900CDBFD6 /* Debug */,

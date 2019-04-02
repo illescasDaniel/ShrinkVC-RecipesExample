@@ -16,13 +16,24 @@ extension Recipe.Internal {
 		// MARK: -
 		
 		var baseURL: URLConvertible {
-			return "http://www.recipepuppy.com/api"
+			return "http://www.recipepuppy.com"
 		}
 		
 		var path: String {
 			switch self {
-			case .recipes(let ingredients, let searchQuery, let page):
-				return "/?i=\(ingredients)&q=\(searchQuery)&p=\(page)"
+			case .recipes:
+				return "api/"
+			}
+		}
+		
+		var queryItems: [URLQueryItem] {
+			switch self {
+				case .recipes(let ingredients, let searchQuery, let page):
+					return [
+						URLQueryItem(name: "i", value: ingredients),
+						URLQueryItem(name: "q", value: searchQuery),
+						URLQueryItem(name: "p", value: "\(page)")
+					]
 			}
 		}
 		

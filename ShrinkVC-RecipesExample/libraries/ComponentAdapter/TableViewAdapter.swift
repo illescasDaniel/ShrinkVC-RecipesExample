@@ -14,7 +14,7 @@ final public class TableViewAdapter<Component: UITableView, ElementType>: Compon
 	
 	public var observableElements = ObservableArray<ElementType>()
 	private weak var component: Component?
-	private var section: Int
+	let section: Int
 	
 	var viewComponent: Component? {
 		return self.component

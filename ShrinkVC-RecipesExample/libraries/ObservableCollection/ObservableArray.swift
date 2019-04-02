@@ -18,6 +18,16 @@ final public class ObservableArray<T>: ObservableCollection, CustomStringConvert
 		return self.elements
 	}
 	
+	public subscript(safe index: Int) -> T? {
+		get {
+			return self.rawElements.indices.contains(index) ? self.rawElements[index] : nil
+		} set {
+			if self.rawElements.indices.contains(index), let newValue = newValue {
+				self.elements[index] = newValue
+			}
+		}
+	}
+	
 	public init(_ elements: CollectionType = [], observers: [ObserverAction<T, Int>] = []) {
 		self.elements = elements
 		self.observers = observers

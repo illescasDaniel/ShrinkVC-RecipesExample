@@ -10,14 +10,17 @@ import Foundation
 
 extension Recipe.Service {
 	enum Models {
-		struct RecipeModel: MappableArrayModel {
-			let title: String
+		struct RecipeModel: MappableArrayModel, MockableModel {
+			var title: String
 			let url: URL
-			let ingredients: String
+			var ingredients: String
 			let thumbnail: String
 			typealias EndpointModel = Recipe.Internal.ApiClient.Models.RecipeResponse
 			static func map(from endpointModel: EndpointModel) -> [RecipeModel] {
 				return endpointModel.results.map { RecipeModel(title: $0.title, url: $0.href, ingredients: $0.ingredients, thumbnail: $0.thumbnail) }
+			}
+			static var mock: RecipeModel {
+				return RecipeModel.init(title: "--", url: URL(string: "http://www.google.com")!, ingredients: "--", thumbnail: "http://www.google.com")
 			}
 		}
 	}
